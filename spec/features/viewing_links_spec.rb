@@ -1,4 +1,4 @@
-feature 'viewing a list' do
+feature 'viewing bookmarks' do
 
   before(:each) do
     Link.create(url: 'www.bubblebobble.com', title: 'Bubble Bobble', tags: [Tag.first_or_create(name: 'bubbles')])
@@ -7,7 +7,7 @@ feature 'viewing a list' do
     Link.create(url: 'www.newzealandstory.com', title: 'New Zealand Story', tags: [Tag.first_or_create(name: 'kiwis')])
   end
 
-  scenario 'users may view their bookmarks' do
+  scenario 'users may view bookmarks' do
     visit '/links'
     within 'ul#links' do
       expect(page).to have_content 'Bubble Bobble'
@@ -15,7 +15,7 @@ feature 'viewing a list' do
     end
   end
 
-  scenario 'users may filter their links by tag' do
+  scenario 'users may filter bookmarks by tag' do
     visit '/tags/bubbles'
     expect(page.status_code).to eq(200)
     within 'ul#links' do
