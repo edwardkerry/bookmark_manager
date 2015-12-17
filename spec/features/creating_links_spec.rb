@@ -1,5 +1,5 @@
 feature 'creating a link' do
-  scenario 'saving a website url and title to bookmarks' do
+  scenario 'users may bookmark a website title and url' do
     visit 'links/new'
     fill_in 'title', with: 'link2'
     fill_in 'url', with: 'www.internet.com'
