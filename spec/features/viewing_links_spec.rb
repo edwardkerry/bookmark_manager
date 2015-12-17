@@ -11,6 +11,7 @@ feature 'viewing a list' do
     visit '/links'
     within 'ul#links' do
       expect(page).to have_content 'Bubble Bobble'
+      expect(page).to have_content 'Dig Dug'
     end
   end
 
@@ -19,6 +20,7 @@ feature 'viewing a list' do
     expect(page.status_code).to eq(200)
     within 'ul#links' do
       expect(page).to have_content('Bubble Bobble')
+      expect(page).to have_content('Rainbow Islands')
       expect(page).not_to have_content('Dig Dug')
     end
   end
