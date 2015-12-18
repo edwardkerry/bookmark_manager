@@ -5,4 +5,10 @@ feature 'user sign up' do
     expect(page).to have_content 'edward.kerry@hotmail.com, welcome to Bookmark Manager!'
     expect(User.first.email).to eq('edward.kerry@hotmail.com')
   end
+
+  scenario 'should confirm validation of password' do
+    expect{sign_up(password_confirmation: 'wrong')}.not_to change(User, :count)
+  end
+
+
 end
