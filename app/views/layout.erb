@@ -7,6 +7,15 @@
   <body>
     <%if current_user %>
       <%=current_user.email%>, welcome to Bookmark Manager!
+      <form action='/sessions' method='post'>
+        <input type='hidden' name='_method' value='delete'>
+        <input type='submit' value='Sign out'>
+      </form>
+    <%end%>
+    <% if flash[:notice] %>
+      <div>
+        <%=flash[:notice]%>
+      </div>
     <%end%>
     <% if flash[:errors] %>
     <ul>
