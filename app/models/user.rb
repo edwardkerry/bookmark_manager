@@ -1,13 +1,19 @@
 require 'data_mapper'
 require 'dm-validations'
 require 'bcrypt'
+require 'securerandom'
 
 class User
 
   include DataMapper::Resource
   property :id,     Serial
-  property :email,  String, unique: true, required: true, format: :email_address
+  property :email,  String,
+            unique: true,
+            required: true,
+            format: :email_address
   property :password_digest, Text
+  property :password_token, Text
+  property :password_token_time, Time
 
   attr_reader :password
   attr_accessor :password_confirmation
@@ -27,4 +33,18 @@ class User
       nil
     end
   end
+
+  def generate_token
+    self.password_token = SecureRandom.hex
+    self.password_token_time = Time.now
+    self.save
+  end
+
+  def self.find_by_valid_token(token)
+    user = first(password_token: token)
+    if (user && user.password_token_time + (60 * 60) > Time.now)
+      user
+    end
+  end
+
 end

@@ -6,6 +6,7 @@ require './app/app'
 require 'web_helpers'
 require 'database_cleaner'
 require 'byebug'
+require 'timecop'
 Capybara.app = BookmarkManager
 
 
