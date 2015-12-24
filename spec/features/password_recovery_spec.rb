@@ -54,6 +54,15 @@ feature 'password recover' do
     expect(page).to have_content "edward.kerry@hotmail.com, welcome to Bookmark Manager"
   end
 
+  scenario 'it lets you know if your passwords dont match' do
+    recover_password
+    visit("/users/reset_password?token=#{user.password_token}")
+    fill_in :password, with: 'newpassword'
+    fill_in :password_confirmation, with: 'badpassword'
+    click_button "Submit"
+    expect(page).to have_content "Password does not match the confirmation"
+  end
+
   def recover_password
     visit '/users/recover'
     fill_in :email, with: 'edward.kerry@hotmail.com'

@@ -41,8 +41,12 @@ class BookmarkManager < Sinatra::Base
 
   patch '/users' do
     @user = User.find_by_valid_token(params[:token])
-    @user.update(password: params[:password], password_confirmation: params[:password_confirmation])
-    redirect "/sessions/new"
+    if @user.update(password: params[:password], password_confirmation: params[:password_confirmation])
+      redirect "/sessions/new"
+    else
+      flash.now[:errors] = @user.errors.full_messages
+      erb :'users/reset_password'
+    end
   end
 
 end
