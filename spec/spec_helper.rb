@@ -2,6 +2,7 @@ ENV["RACK_ENV"] = "test"
 require_relative 'helpers/session'
 require 'capybara/rspec'
 require './app/models/link'
+require './lib/send_recovery_link'
 require './app/app'
 require 'web_helpers'
 require 'database_cleaner'

@@ -8,6 +8,8 @@ gem 'rake'
 gem 'bcrypt'
 gem 'sinatra-flash'
 gem 'timecop'
+gem 'mailgun-ruby'
+gem 'dotenv'
 
 group :test do
   gem 'byebug'
